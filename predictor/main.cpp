@@ -2,8 +2,8 @@
 #include <string>
 #include <map>
 #include <algorithm>
-using namespace std;
 
+using namespace std;
 
 template <typename Symbol>
 class Predictor
