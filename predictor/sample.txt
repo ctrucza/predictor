@@ -1,5 +1,5 @@
-the cat sat on the mat.
-the mat was under the cat.
-the cat had no hat.
-the hat sat on the mat next to the cat.
+the cat sat on the mat
+the mat was under the cat
+the cat had no hat
+the hat sat on the mat next to the cat
 
