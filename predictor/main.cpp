@@ -16,7 +16,7 @@ private:
 	friend ostream& operator<<(ostream& os, const Frequencies<T>& f);
 
 	ostream& print(ostream& os) const {
-		for (map<Symbol, int>::const_iterator i = occurences.begin(); i != occurences.end(); ++i){
+		for (map<Symbol, int>::const_iterator i = occurences.begin(); i != occurences.end(); ++i) {
 			os << "[" << i->first << "](" << i->second << ") ";
 		}
 		return os;
@@ -37,7 +37,7 @@ public:
 		double best_score = 0.0;
 		for (auto i = occurences.begin(); i != occurences.end(); ++i) {
 			double score = (double)i->second/(double)total;
-			if (i->second > best_score){
+			if (i->second > best_score) {
 				best_score = i->second;
 				result = i->first;
 			}
@@ -65,8 +65,8 @@ private:
 	}
 
 	void print_neighbours(ostream& os, const Neighbours n) {
-		for (Neighbours::const_iterator i = n.begin(); i != n.end(); ++i){
-			cout << "[" << i->first << "]("<< i->second.size() <<") ";
+		for (Neighbours::const_iterator i = n.begin(); i != n.end(); ++i) {
+			cout << "[" << i->first << "](" << i->second.size() << ") ";
 			cout << i->second;
 			cout << "" << endl;
 		}
@@ -101,7 +101,7 @@ int main() {
 	for (auto i = corpus.begin(); i != corpus.end(); ++i) {
 		predictor.add(*i);
 	}
-	
+
 	string last_word;
 	int good_predictions = 0;
 	int bad_predictions = 0;
