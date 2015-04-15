@@ -1,2 +1,1 @@
-- when predicting use predecessor and successors
 - make it hierarchical
