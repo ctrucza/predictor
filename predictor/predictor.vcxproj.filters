@@ -23,5 +23,6 @@
     <Text Include="sample.txt" />
     <Text Include="results.txt" />
     <Text Include="readme.txt" />
+    <Text Include="large sample.txt" />
   </ItemGroup>
 </Project>
