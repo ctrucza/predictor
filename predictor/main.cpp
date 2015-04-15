@@ -7,20 +7,36 @@
 using namespace std;
 
 template <typename Symbol>
-class Predictor
+class Frequencies
 {
 private:
-	typedef map<Symbol, int> Frequencies;
-	typedef map<Symbol, Frequencies> Neighbours;
-	Neighbours successors;
-	Neighbours predecessors;
+	int total = 0;
+	map<Symbol, int> occurences;
 
-	Symbol last_symbol;
+	template <typename T>
+	friend ostream& operator<<(ostream& os, const Frequencies<T>& f);
 
-	Symbol best_of(const Frequencies& f) const {
+	ostream& print(ostream& os) const {
+		for (map<Symbol, int>::const_iterator i = occurences.begin(); i != occurences.end(); ++i){
+			os << "[" << i->first << "](" << i->second << ") ";
+		}
+		return os;
+	}
+
+public:
+	void add(const Symbol& other){
+		occurences[other]++;
+		total++;
+	}
+
+	int size() const {
+		return occurences.size();
+	}
+
+	Symbol find_best() const{
 		Symbol result;
 		int best_count = 0;
-		for (auto i = f.begin(); i != f.end(); ++i){
+		for (auto i = occurences.begin(); i != occurences.end(); ++i){
 			if (i->second > best_count){
 				best_count = i->second;
 				result = i->first;
@@ -28,24 +44,38 @@ private:
 		}
 		return result;
 	}
+};
 
-	void print_occurences(ostream &os, const Frequencies o){
-		for (Frequencies::const_iterator i = o.begin(); i != o.end(); ++i){
-			cout << "[" << i->first << "](" << i->second << ") ";
-		}
+template <typename Symbol>
+ostream& operator<<(ostream& os, const Frequencies<Symbol>& f){
+	return f.print(os);
+}
+
+template <typename Symbol>
+class Predictor
+{
+private:
+	typedef map<Symbol, Frequencies<Symbol>> Neighbours;
+	Neighbours successors;
+	Neighbours predecessors;
+
+	Symbol last_symbol;
+
+	Symbol best_of(const Frequencies<Symbol>& f) const {
+		return f.find_best();
 	}
 
 	void print_neighbours(ostream& os, const Neighbours n){
 		for (Neighbours::const_iterator i = n.begin(); i != n.end(); ++i){
 			cout << "[" << i->first << "]("<< i->second.size() <<") ";
-			print_occurences(cout, i->second);
+			cout << i->second;
 			cout << "" << endl;
 		}
 	}
 public:
 	void add(const Symbol& s){
-		successors[last_symbol][s]++;
-		predecessors[s][last_symbol]++;
+		successors[last_symbol].add(s);// [s]++;
+		predecessors[s].add(last_symbol);// [last_symbol]++;
 		last_symbol = s;
 	}
 
@@ -89,5 +119,5 @@ int main(){
 	}
 	double performance = (double)good_predictions / (double)(good_predictions + bad_predictions);
 	cout << "performance: " << performance << endl;
-	//predictor.dump();
+	predictor.dump();
 }
