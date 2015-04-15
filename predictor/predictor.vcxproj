@@ -79,6 +79,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="readme.txt" />
     <Text Include="results.txt" />
     <Text Include="sample.txt" />
   </ItemGroup>

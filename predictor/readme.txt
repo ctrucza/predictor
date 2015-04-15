@@ -1,1 +1,5 @@
-- now make it hierarchical
+- add performance measurements
+	- make a prediction
+	- compare with the actual
+- when predicting use predecessor and successors
+- make it hierarchical

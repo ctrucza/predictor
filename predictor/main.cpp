@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <list>
 
 using namespace std;
 
@@ -17,10 +18,15 @@ private:
 	Symbol last_symbol;
 
 	Symbol best_of(const Frequencies& f) const {
-		auto result = max_element(f.begin(), f.end(), f.value_comp());
-		if (result == f.end())
-			return Symbol();
-		return result->first;
+		Symbol result;
+		int best_count = 0;
+		for (auto i = f.begin(); i != f.end(); ++i){
+			if (i->second > best_count){
+				best_count = i->second;
+				result = i->first;
+			}
+		}
+		return result;
 	}
 
 	void print_occurences(ostream &os, const Frequencies o){
@@ -55,10 +61,33 @@ public:
 
 int main(){
 	Predictor<string> predictor;
+
+	list<string> corpus;
 	string word;
 	while (cin >> word){
 		transform(word.begin(), word.end(), word.begin(), tolower);
-		predictor.add(word);
+		corpus.push_back(word);
 	}
-	predictor.dump();
+
+	for (auto i = corpus.begin(); i != corpus.end(); ++i)
+	{
+		predictor.add(*i);
+	}
+	
+	string last_word;
+	int good_predictions = 0;
+	int bad_predictions = 0;
+	for (auto i = corpus.begin(); i != corpus.end(); ++i)
+	{
+		string prediction = predictor.predict(last_word);
+		if (prediction == *i){
+			good_predictions++;
+		} else {
+			bad_predictions++;
+		}
+		last_word = *i;
+	}
+	double performance = (double)good_predictions / (double)(good_predictions + bad_predictions);
+	cout << "performance: " << performance << endl;
+	//predictor.dump();
 }
