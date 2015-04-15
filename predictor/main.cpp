@@ -35,10 +35,11 @@ public:
 
 	Symbol find_best() const{
 		Symbol result;
-		int best_count = 0;
+		double best_score = 0.0;
 		for (auto i = occurences.begin(); i != occurences.end(); ++i){
-			if (i->second > best_count){
-				best_count = i->second;
+			double score = (double)i->second/(double)total;
+			if (i->second > best_score){
+				best_score = i->second;
 				result = i->first;
 			}
 		}
