@@ -32,5 +32,11 @@
     <ClInclude Include="Predictor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Corpus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Probe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

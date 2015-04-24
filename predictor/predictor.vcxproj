@@ -85,8 +85,10 @@
     <Text Include="sample.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Corpus.h" />
     <ClInclude Include="Frequencies.h" />
     <ClInclude Include="Predictor.h" />
+    <ClInclude Include="Probe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
