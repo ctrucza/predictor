@@ -29,5 +29,8 @@
     <ClInclude Include="Frequencies.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Predictor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
