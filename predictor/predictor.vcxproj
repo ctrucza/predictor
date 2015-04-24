@@ -79,6 +79,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="hierarchy.txt" />
     <Text Include="large sample.txt" />
     <Text Include="readme.txt" />
     <Text Include="results.txt" />
@@ -87,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="Corpus.h" />
     <ClInclude Include="Frequencies.h" />
+    <ClInclude Include="Prediction.h" />
     <ClInclude Include="Predictor.h" />
     <ClInclude Include="Probe.h" />
   </ItemGroup>

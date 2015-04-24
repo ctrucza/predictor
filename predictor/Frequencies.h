@@ -3,6 +3,7 @@
 
 #include <map>
 #include <ostream>
+#include "Prediction.h"
 
 template <typename Symbol>
 class Frequencies {
@@ -30,16 +31,21 @@ public:
 		return occurences.size();
 	}
 
-	Symbol find_best() const {
-		Symbol result;
+	Prediction<Symbol> find_best() const {
+		Symbol best_symbol;
 		double best_score = 0.0;
 		for (auto i = occurences.begin(); i != occurences.end(); ++i) {
 			double score = (double)i->second/(double)total;
 			if (i->second > best_score) {
 				best_score = i->second;
-				result = i->first;
+				best_symbol = i->first;
 			}
 		}
+
+		Prediction<Symbol> result;
+		result.symbol = best_symbol;
+		result.confidence = (double)best_score/(double)total;
+
 		return result;
 	}
 };

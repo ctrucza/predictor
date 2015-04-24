@@ -3,6 +3,7 @@
 
 #include <map>
 #include <ostream>
+#include "Prediction.h"
 
 template <typename Symbol>
 class Predictor {
@@ -13,15 +14,15 @@ private:
 
 	Symbol last_symbol;
 
-	Symbol best_of(const Frequencies<Symbol>& f) const {
+	Prediction<Symbol> best_of(const Frequencies<Symbol>& f) const {
 		return f.find_best();
 	}
 
 	void print_neighbours(std::ostream& os, const Neighbours n) {
 		for (Neighbours::const_iterator i = n.begin(); i != n.end(); ++i) {
-			cout << "[" << i->first << "](" << i->second.size() << ") ";
-			cout << i->second;
-			cout << "" << endl;
+			os << "[" << i->first << "](" << i->second.size() << ") ";
+			os << i->second;
+			os << "" << std::endl;
 		}
 	}
 public:
@@ -31,13 +32,15 @@ public:
 		last_symbol = s;
 	}
 
-	Symbol predict(const Symbol& previous) {
+	Prediction<Symbol> predict(const Symbol& previous) {
 		return best_of(successors[previous]);
 	}
 
 	void dump() {
-		print_neighbours(cout, successors);
-		print_neighbours(cout, predecessors);
+		std::cout << "successors" << std::endl;
+		print_neighbours(std::cout, successors);
+		std::cout << "predecessors" << std::endl;
+		print_neighbours(std::cout, predecessors);
 	}
 };
 

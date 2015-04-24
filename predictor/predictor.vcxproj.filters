@@ -24,6 +24,7 @@
     <Text Include="results.txt" />
     <Text Include="readme.txt" />
     <Text Include="large sample.txt" />
+    <Text Include="hierarchy.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Frequencies.h">
@@ -36,6 +37,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Probe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Prediction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
