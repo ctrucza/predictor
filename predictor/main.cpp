@@ -1,55 +1,10 @@
 #include <iostream>
 #include <string>
-#include <map>
 #include <algorithm>
 #include <list>
+#include "Frequencies.h"
 
 using namespace std;
-
-template <typename Symbol>
-class Frequencies {
-private:
-	int total = 0;
-	map<Symbol, int> occurences;
-
-	template <typename T>
-	friend ostream& operator<<(ostream& os, const Frequencies<T>& f);
-
-	ostream& print(ostream& os) const {
-		for (map<Symbol, int>::const_iterator i = occurences.begin(); i != occurences.end(); ++i) {
-			os << "[" << i->first << "](" << i->second << ") ";
-		}
-		return os;
-	}
-
-public:
-	void add(const Symbol& other) {
-		occurences[other]++;
-		total++;
-	}
-
-	int size() const {
-		return occurences.size();
-	}
-
-	Symbol find_best() const {
-		Symbol result;
-		double best_score = 0.0;
-		for (auto i = occurences.begin(); i != occurences.end(); ++i) {
-			double score = (double)i->second/(double)total;
-			if (i->second > best_score) {
-				best_score = i->second;
-				result = i->first;
-			}
-		}
-		return result;
-	}
-};
-
-template <typename Symbol>
-ostream& operator<<(ostream& os, const Frequencies<Symbol>& f) {
-	return f.print(os);
-}
 
 template <typename Symbol>
 class Predictor {

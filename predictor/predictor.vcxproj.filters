@@ -25,4 +25,9 @@
     <Text Include="readme.txt" />
     <Text Include="large sample.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Frequencies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
