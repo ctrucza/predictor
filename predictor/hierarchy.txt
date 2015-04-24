@@ -1,0 +1,24 @@
+How do we make a hierarchical predictor?
+========================================
+
+Simple predictor:
+- receives a stream of signals
+- make a single prediction
+
+Example:
+input stream:
+123123123
+prediction
+????23123
+
+1. We expect that this predictor learns "123" as pattern.
+- why not 231? 312? Actually it could learn any of them.
+- however if the stream is more complicated, like:
+123456456456123123456123123123456456123456456123....
+then we expect that 123 and 456 will be learned.
+
+What is special about 123 and 456 in this case?
+- 2 is always preceded by 1 and followed by 3
+- 5 is always preceded by 4 and followed by 6
+
+Let's see...
