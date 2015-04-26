@@ -23,10 +23,19 @@ int main() {
 	corpus.visit([&](const Symbol& symbol) {
 		predictor.add(symbol); 
 	});
-	
-	Probe<Symbol> probe;
-	double performance = probe.measure_performance(predictor, corpus);
-	std::cout << "performance: " << performance << std::endl;
+
+	{
+		Probe<Symbol> probe;
+		double performance = probe.measure_performance(predictor, corpus);
+		std::cout << "performance: " << performance << std::endl;
+	}
+
+	predictor.prune();
+	{
+		Probe<Symbol> probe;
+		double performance = probe.measure_performance(predictor, corpus);
+		std::cout << "performance after prune: " << performance << std::endl;
+	}
 
 	predictor.dump();
 

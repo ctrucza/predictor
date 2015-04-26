@@ -20,15 +20,26 @@ private:
 
 	void print_neighbours(std::ostream& os, const Neighbours& n) {
 		for (Neighbours::const_iterator i = n.begin(); i != n.end(); ++i) {
-			if (i->second.size() > 1)
-				continue;
-			Prediction<Symbol> p = i->second.find_best();
-			if (p.occurences < 5)
-				continue;
 			os << "[" << i->first << "](" << i->second.size() << ") ";
 			os << i->second;
 			os << "" << std::endl;
 		}
+	}
+
+	void prune(Neighbours& n){
+		Neighbours result;
+		for (auto i = n.begin(); i != n.end(); ++i){
+			auto s = i->second;
+			if (s.size() == 1){
+				auto p = s.find_best();
+				if (p.occurences == 1){
+					std::cerr << "eliminating " << i->first << " " << i->second << std::endl;
+					continue;
+				}
+			}
+			result[i->first] = i->second;
+		}
+		n = result;
 	}
 public:
 	void add(const Symbol& s) {
@@ -38,14 +49,23 @@ public:
 	}
 
 	Prediction<Symbol> predict(const Symbol& previous) {
+		if (successors.find(previous) == successors.end()){
+			return Prediction<Symbol>();
+		}
 		return best_of(successors[previous]);
+	}
+
+	void prune()
+	{
+		prune(successors);
+		prune(predecessors);
 	}
 
 	void dump() {
 		std::cout << "successors" << std::endl;
 		print_neighbours(std::cout, successors);
-		//std::cout << "predecessors" << std::endl;
-		//print_neighbours(std::cout, predecessors);
+		std::cout << "predecessors" << std::endl;
+		print_neighbours(std::cout, predecessors);
 	}
 };
 
