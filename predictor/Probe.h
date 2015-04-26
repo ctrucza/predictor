@@ -8,12 +8,15 @@ public:
 		Symbol last_word = Symbol();
 		int good_predictions = 0;
 		int bad_predictions = 0;
+		int null_predictions = 0;
 		double confidence = 0.0;
 
 		corpus.visit([&](const Symbol& s) {
 			Prediction<Symbol> prediction = predictor.predict(last_word);
 			Symbol predicted_symbol = prediction.symbol;
-			if (predicted_symbol == s) {
+			if (prediction.is_null()){
+				null_predictions++;
+			} else if (predicted_symbol == s) {
 				good_predictions++;
 				confidence += prediction.confidence;
 			} else {
@@ -23,7 +26,7 @@ public:
 			last_word = s;
 		});
 
-		return (double)good_predictions / (double)(good_predictions + bad_predictions);;
+		return (double)good_predictions / (double)(good_predictions + bad_predictions + null_predictions);;
 		//return confidence / (double)(good_predictions + bad_predictions);;
 	}
 };
