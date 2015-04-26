@@ -12,14 +12,19 @@ private:
 	Neighbours successors;
 	Neighbours predecessors;
 
-	Symbol last_symbol;
+	Symbol last_symbol = Symbol();
 
 	Prediction<Symbol> best_of(const Frequencies<Symbol>& f) const {
 		return f.find_best();
 	}
 
-	void print_neighbours(std::ostream& os, const Neighbours n) {
+	void print_neighbours(std::ostream& os, const Neighbours& n) {
 		for (Neighbours::const_iterator i = n.begin(); i != n.end(); ++i) {
+			if (i->second.size() > 1)
+				continue;
+			Prediction<Symbol> p = i->second.find_best();
+			if (p.occurences < 5)
+				continue;
 			os << "[" << i->first << "](" << i->second.size() << ") ";
 			os << i->second;
 			os << "" << std::endl;
@@ -39,8 +44,8 @@ public:
 	void dump() {
 		std::cout << "successors" << std::endl;
 		print_neighbours(std::cout, successors);
-		std::cout << "predecessors" << std::endl;
-		print_neighbours(std::cout, predecessors);
+		//std::cout << "predecessors" << std::endl;
+		//print_neighbours(std::cout, predecessors);
 	}
 };
 

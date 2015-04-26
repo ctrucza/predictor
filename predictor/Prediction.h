@@ -6,6 +6,7 @@ class Prediction {
 public:
 	Symbol symbol;
 	double confidence;
+	int occurences;
 };
 
 #endif

@@ -10,12 +10,12 @@
 #include "Probe.h"
 
 int main() {
-	typedef char Symbol;
+	typedef std::string Symbol;
 
 	Corpus<Symbol> corpus;
 	corpus.load(std::cin, [](Symbol& s) {
-		s = tolower(s);
-		//transform(s.begin(), s.end(), s.begin(), tolower);
+		//s = tolower(s);
+		transform(s.begin(), s.end(), s.begin(), tolower);
 		return s; 
 	});
 	

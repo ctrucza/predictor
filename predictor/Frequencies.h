@@ -32,18 +32,21 @@ public:
 	}
 
 	Prediction<Symbol> find_best() const {
-		Symbol best_symbol;
+		Symbol best_symbol = Symbol();
 		double best_score = 0.0;
+		int best_occurences = 0;
 		for (auto i = occurences.begin(); i != occurences.end(); ++i) {
 			double score = (double)i->second/(double)total;
-			if (i->second > best_score) {
-				best_score = i->second;
+			if (score > best_score) {
+				best_score = score;
 				best_symbol = i->first;
+				best_occurences = i->second;
 			}
 		}
 
 		Prediction<Symbol> result;
 		result.symbol = best_symbol;
+		result.occurences = best_occurences;
 		result.confidence = (double)best_score/(double)total;
 
 		return result;

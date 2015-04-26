@@ -5,7 +5,7 @@ template <typename Symbol>
 class Probe {
 public:
 	double measure_performance(Predictor<Symbol>& predictor, Corpus<Symbol>& corpus) {
-		Symbol last_word;
+		Symbol last_word = Symbol();
 		int good_predictions = 0;
 		int bad_predictions = 0;
 		double confidence = 0.0;
