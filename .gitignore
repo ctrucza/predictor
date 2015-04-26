@@ -1,2 +1,7 @@
 *.sdf
 *.opensdf
+.vs/
+Debug/
+predictor/Debug/
+predictor/predictor.vcxproj.user
+predictor.v12.suo
