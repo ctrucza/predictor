@@ -5,8 +5,12 @@ template <typename Symbol>
 class Prediction {
 public:
 	Symbol symbol;
-	double confidence;
-	int occurences;
+	double confidence = 0.0;
+	int occurences = 0;
+
+	bool is_null(){
+		return (occurences == 0);
+	}
 };
 
 #endif
